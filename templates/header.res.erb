@@ -4,13 +4,21 @@ resource <%= @name %> {
   device    <%= @device %>;
   disk      <%= @disk %>;
   meta-disk internal;
-
+<% if @allow_two_primaries -%>
+  startup {
+    wfc-timeout  15;
+    degr-wfc-timeout 60;
+    become-primary-on both;
+  }
+<% end -%>
   net {
     cram-hmac-alg sha1;
 <% if @secret -%>
     shared-secret "<%= @secret %>";
 <% end -%>
+<% if @allow_two_primaries -%>
     #allow-two-primaries;
+<% end -%>
 <% if @net_parameters -%>
 <% @net_parameters.sort_by {|k, v| k}.each do |k, v| -%>
     <%= k %> <%= v %>;
@@ -24,4 +32,3 @@ resource <%= @name %> {
     rate <%= @rate %>;
 <% end -%>
   }
-

@@ -10,6 +10,7 @@
 #  [res2] Second stacked resource name.
 #  [disk] Name of disk to be replicated. Assumes that the
 #     name of the disk will be the same on both hosts. Required.
+#  [allow_two_primaries] Configure Multimaster Support
 #  [secret] The shared secret used in peer authentication.. False indicates that
 #    no secret be required. Optional. Defaults to false.
 #  [port] Port which drbd will use for replication on both hosts.
@@ -23,30 +24,31 @@
 #  [initial_setup] If this run is associated with the initial setup. Allows a user
 #    to only perform dangerous setup on the initial run.
 define drbd::resource (
-  $host1          = undef,
-  $host2          = undef,
-  $ip1            = undef,
-  $ip2            = undef,
-  $res1           = undef,
-  $res2           = undef,
-  $cluster        = undef,
-  $secret         = false,
-  $port           = '7789',
-  $device         = '/dev/drbd0',
-  $mountpoint     = "/drbd/${name}",
-  $automount      = true,
-  $owner          = 'root',
-  $group          = 'root',
-  $protocol       = 'C',
-  $verify_alg     = 'crc32c',
-  $rate           = false,
-  $net_parameters = false,
-  $manage         = true,
-  $ha_primary     = false,
-  $initial_setup  = false,
-  $fs_type        = 'ext4',
-  $mkfs_opts      = '',
-  $disk           = undef,
+  $host1               = undef,
+  $host2               = undef,
+  $ip1                 = undef,
+  $ip2                 = undef,
+  $res1                = undef,
+  $res2                = undef,
+  $cluster             = undef,
+  $allow_two_primaries = undef,
+  $secret              = false,
+  $port                = '7789',
+  $device              = '/dev/drbd0',
+  $mountpoint          = "/drbd/${name}",
+  $automount           = true,
+  $owner               = 'root',
+  $group               = 'root',
+  $protocol            = 'C',
+  $verify_alg          = 'crc32c',
+  $rate                = false,
+  $net_parameters      = false,
+  $manage              = true,
+  $ha_primary          = false,
+  $initial_setup       = false,
+  $fs_type             = 'ext4',
+  $mkfs_opts           = '',
+  $disk                = undef,
 ) {
   include ::drbd
 
@@ -81,6 +83,7 @@ define drbd::resource (
   # - $device
   # - $disk
   # - $secret
+  # - $allow_two_primaries
   # - $verify_alg
   # - $host1
   # - $host2
