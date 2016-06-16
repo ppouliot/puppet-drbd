@@ -24,7 +24,7 @@
 #  [initial_setup] If this run is associated with the initial setup. Allows a user
 #    to only perform dangerous setup on the initial run.
 define drbd::resource (
-  $host1            `         = undef,
+  $host1                     = undef,
   $host2                     = undef,
   $ip1                       = undef,
   $ip2                       = undef,
