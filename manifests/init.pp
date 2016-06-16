@@ -1,11 +1,15 @@
-#
+# == Class: drbd::init
 # This class can be used to configure the drbd service.
 #
 # It has been influenced by the camptocamp module as well as
 # by an example created by Rackspace's cloudbuilders
 #
+# [service_enable]
+# [global_startup_parameters]
+#
 class drbd(
-  $service_enable = true
+  $service_enable            = true,
+  $global_startup_parameters = undef,
 ) {
   include ::drbd::service
 
