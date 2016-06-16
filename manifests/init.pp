@@ -9,6 +9,7 @@
 #
 class drbd(
   $service_enable            = true,
+  $handlers                  = undef,
   $global_startup_parameters = undef,
 ) {
   include ::drbd::service

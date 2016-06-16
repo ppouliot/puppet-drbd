@@ -12,13 +12,6 @@ resource <%= @name %> {
   }
 <% end -%>
 
-#<% if @allow_two_primaries -%>
-#  startup {
-#    wfc-timeout  15;
-#    degr-wfc-timeout 60;
-#    become-primary-on both;
-#  }
-#<% end -%>
   net {
     cram-hmac-alg sha1;
 <% if @secret -%>
